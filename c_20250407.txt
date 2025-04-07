@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <string.h>
+
+void main()
+{
+    int M = 0, N = 0, L = 0;
+    char number[1000000];
+    printf("정수 2개를 입력하세요.\n");
+    scanf("%d %d", &M, &N);
+    if (M > N) {
+        L = M;
+        M = N;
+        N = L;
+    }
+    for (int i = M; i <= N; i++) {
+        sprintf(number, "%d", i);
+        int a = 0;
+        for (int j = 0; j < strlen(number); j++) {
+            if (i % 7 == 0 | number[j] == '7') {
+                    a++;
+            } else {
+                continue;
+            }
+        }
+        if (i % 5 == 0) {
+            if (a == 0) {
+                printf("%d\n", i);
+                break;
+            } else {
+                break;
+            }
+        } else {
+            if (a == 0) {
+                printf("%d\n", i);
+            } else {
+                continue;
+            }
+        }
+    }
+}
