@@ -1,0 +1,11 @@
+#include <stdio.h>
+
+void main()
+{
+    int a = 0, i = 2;
+    scanf("%d", &a);
+    while (i <= a) {
+        printf("%d ", i);
+        i = i + 2;
+    }
+}
