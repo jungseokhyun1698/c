@@ -4,6 +4,9 @@ void main()
 {
     int a = 0, i = 2;
     scanf("%d", &a);
+    if (a <= 1) {
+        printf("Error");
+    }
     while (i <= a) {
         printf("%d ", i);
         i = i + 2;
