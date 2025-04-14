@@ -1,0 +1,159 @@
+#include <stdio.h>
+#include <string.h>
+#define TRUE 1
+#define FALSE 0
+
+struct groups {
+    char *name;
+    int age;
+    char *gender;
+};
+union student {
+    char *hobby;
+    char *etc;
+};
+struct groups g1[1000] = {
+    {"hong", 30, "M"},
+    {"kim", 25, "M",},
+    {"park", 20, "F",}
+};
+union student u[1000] = {
+    "soccer",
+    "music",
+    "movie"
+};
+void func1(int n)
+{
+    if (strcmp(u[n].hobby, "0") == 0) {
+        printf("%d. %s/%d/%s/%s\n", n + 1, g1[n].name, g1[n].age, g1[n].gender, u[n].etc);
+    } else {
+        printf("%d. %s/%d/%s/%s\n", n + 1, g1[n].name, g1[n].age, g1[n].gender, u[n].hobby);
+    }
+}
+void func2()
+{
+    int i = 0;
+    while(TRUE) {
+        func1(i);
+        i++;
+        if (i == 3) {
+            break;
+        }
+    }
+}
+void func3(int n)
+{
+    printf("이름:");
+    scanf("%ms", &g1[n].name);
+    while(TRUE) {
+        printf("나이:");
+        scanf("%d", &g1[n].age);
+        if (g1[n].age < 0) {
+            continue;
+        } else {
+            break;
+        }
+    }
+    while(TRUE) {
+        printf("성별:");
+        scanf("%ms", &g1[n].gender);
+        if (strcmp(g1[n].gender, "F") != 0 && strcmp(g1[n].gender, "M") != 0) {
+            continue;
+        } else {
+            break;
+        }
+    }
+    while(TRUE) {
+        printf("취미(없으면 0):");
+        scanf("%ms", &u[n].hobby);
+        if (strcmp(u[n].hobby, "0") == 0) {
+            while(TRUE) {
+                printf("etc(없으면 0):");
+                scanf("%ms", &u[n].etc);
+                if (strcmp(u[n].etc, "0") == 0) {
+                    continue;
+                }
+                break;
+            }
+        }
+        break;
+    }
+}
+int func4(int n)
+{
+    int z = 0;
+    printf("%d명 등록. 0(continue) / 1(break) ", n + 1);
+    scanf("%d", &z);
+    return z != 0;
+}
+void main()
+{
+    /*union student u[1000];
+    u[0].hobby = "soccer";
+    u[1].hobby = "music";
+    u[2].hobby = "movie";
+    int n = 0;
+    while(TRUE) {
+        printf("%d. %s/%d/%s/%s\n", n + 1, g1[n].name, g1[n].age, g1[n].gender, u[n].hobby);
+        n++;
+        if (n == 3) break;
+    }*/
+    func2();
+    for (int i = 3; i < 1000; i++) {
+        func3(i);
+        for (int j = 0; j <= i; j++) {
+            func1(j);
+        }
+        if (func4(i)) {
+            break;
+        }
+    }
+    /*for (int i = 3; i < 1000; i++) {
+        printf("이름:"); scanf("%ms", &g1[i].name);
+        printf("나이:"); scanf("%d", &g1[i].age);
+        printf("성별:"); scanf("%ms", &g1[i].gender);
+        printf("취미:"); scanf("%ms", &u[i].hobby);
+        printf("etc:"); scanf("%ms", &u[i].etc);
+        for (int j = 0; j <= i; j++) {
+            printf("%d. %s/%d/%s/%s\n", j + 1, g1[j].name, g1[j].age, g1[j].gender, u[j].etc);
+        }
+        int z = 0;
+        printf("0(continue) / 1(break) "); scanf("%d", &z);
+        if (z == 0) continue;
+        else break;
+    }*/
+}
+/*#define TRUE 1
+#define FALSE 0
+
+struct groups {
+    char *name;
+    int age;
+    char *gender;
+    char *hobby;
+};
+
+struct groups g1[1000] = {
+    {"hong", 30, "M", "soccer"},
+    {"kim", 25, "M", "music"},
+    {"park", 20, "F", "movie"}
+};
+
+void main()
+{
+    int n = 0;
+    while(TRUE) {
+        printf("%d. %s/%d/%s/%s\n", n + 1, g1[n].name, g1[n].age, g1[n].gender, g1[n].hobby);
+        n++;
+        if (n == 3) break;
+    }
+    for (int i = 3; i < 1000; i++) {
+        printf("이름:"); scanf("%ms", &g1[i].name);
+        printf("나이:"); scanf("%d", &g1[i].age);
+        printf("성별:"); scanf("%ms", &g1[i].gender);
+        printf("취미:"); scanf("%ms", &g1[i].hobby);
+        for (int j = 0; j <= i; j++) {
+            printf("%d. %s/%d/%s/%s\n", j + 1, g1[j].name, g1[j].age, g1[j].gender, g1[j].hobby);
+        }
+    }
+}*/
