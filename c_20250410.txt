@@ -1,0 +1,35 @@
+#include <stdio.h>
+#define TRUE 1
+#define FALSE 0
+
+struct groups {
+    char *name;
+    int age;
+    char *gender;
+    char *hobby;
+};
+
+struct groups g1[1000] = {
+    {"hong", 30, "M", "soccer"},
+    {"kim", 25, "M", "music"},
+    {"park", 20, "F", "movie"}
+};
+
+void main()
+{
+    int n = 0;
+    while(TRUE) {
+        printf("%d. %s/%d/%s/%s\n", n + 1, g1[n].name, g1[n].age, g1[n].gender, g1[n].hobby);
+        n++;
+        if (n == 3) break;
+    }
+    for (int i = 3; i < 1000; i++) {
+        printf("이름:"); scanf("%ms", &g1[i].name);
+        printf("나이:"); scanf("%d", &g1[i].age);
+        printf("성별:"); scanf("%ms", &g1[i].gender);
+        printf("취미:"); scanf("%ms", &g1[i].hobby);
+        for (int j = 0; j <= i; j++) {
+            printf("%d. %s/%d/%s/%s\n", j + 1, g1[j].name, g1[j].age, g1[j].gender, g1[j].hobby);
+        }
+    }
+}
