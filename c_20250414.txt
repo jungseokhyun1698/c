@@ -82,6 +82,12 @@ void func3(int n)
 }
 int func4(int n)
 {
+    for (int j = 0; j <= n; j++) {
+        func1(j);
+    }
+}
+int func5(int n)
+{
     int z = 0;
     printf("%d명 등록. 0(continue) / 1(break) ", n + 1);
     scanf("%d", &z);
@@ -92,10 +98,8 @@ void main()
     func2();
     for (int i = 3; i < 1000; i++) {
         func3(i);
-        for (int j = 0; j <= i; j++) {
-            func1(j);
-        }
-        if (func4(i)) {
+        func4(i);
+        if (func5(i)) {
             break;
         }
     }
