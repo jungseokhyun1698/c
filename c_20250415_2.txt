@@ -7,7 +7,7 @@ void main()
     enum d {SEDAN = 1, SUV = 2, TRUCK = 3, VAN = 4};
     enum d dd;
     
-    printf("SEDAN = 1, SUV = 2, TRUCK = 3, VAN = 4 ");
+    printf("1. SEDAN, 2. SUV, 3. TRUCK, 4. VAN ");
     scanf("%d", &dd);
     switch (dd)
     {
