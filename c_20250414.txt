@@ -48,10 +48,10 @@ void func3(int n)
     while(TRUE) {
         printf("나이:");
         scanf("%d", &g1[n].age);
-        if (g1[n].age < 0) {
-            continue;
-        } else {
+        if (g1[n].age >= 0 && g1[n].age <= 1000) {
             break;
+        } else {
+            continue;
         }
     }
     while(TRUE) {
