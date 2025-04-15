@@ -1,0 +1,29 @@
+#include <stdio.h>
+#define TRUE 1
+#define FALSE 0
+
+void main()
+{
+    enum d {SEDAN = 1, SUV = 2, TRUCK = 3, VAN = 4};
+    enum d dd;
+    
+    printf("SEDAN = 1, SUV = 2, TRUCK = 3, VAN = 4 ");
+    scanf("%d", &dd);
+    switch (dd)
+    {
+        case SEDAN:
+            printf("SEDAN");
+            break;
+        case SUV:
+            printf("SUV");
+            break;
+        case TRUCK:
+            printf("TRUCK");
+            break;
+        case VAN:
+            printf("VAN");
+            break;
+        default:
+            printf("선택 불가능\n");
+    }
+}
