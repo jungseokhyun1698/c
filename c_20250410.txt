@@ -9,18 +9,15 @@ struct groups {
     char *gender;
     char *hobby;
 };
-
 struct groups g1[1000] = {
     {"hong", 30, "M", "soccer"},
     {"kim", 25, "M", "music"},
     {"park", 20, "F", "movie"}
 };
-
 void func1(int n)
 {
     printf("%d. %s/%d/%s/%s\n", n + 1, g1[n].name, g1[n].age, g1[n].gender, g1[n].hobby);
 }
-
 void func2()
 {
     int i = 0;
@@ -32,7 +29,6 @@ void func2()
         }
     }
 }
-
 void func3(int n)
 {
     printf("이름:");
@@ -59,24 +55,26 @@ void func3(int n)
     printf("취미:");
     scanf("%ms", &g1[n].hobby);
 }
-
 int func4(int n)
+{
+    for (int j = 0; j <= n; j++) {
+        func1(j);
+    }
+}
+int func5(int n)
 {
     int z = 0;
     printf("%d명 등록. 0(continue) / 1(break) ", n + 1);
     scanf("%d", &z);
     return z != 0;
 }
-
 void main()
 {
     func2();
     for (int i = 3; i < 1000; i++) {
         func3(i);
-        for (int j = 0; j <= i; j++) {
-            func1(j);
-        }
-        if (func4(i)) {
+        func4(i);
+        if (func5(i)) {
             break;
         }
     }
