@@ -1,0 +1,23 @@
+#include <stdio.h>
+
+void main()
+{
+    union u {
+        int intVal;
+        float floatVal;
+        char *charVal;
+    };
+    union u u;
+    printf("정수:");
+    scanf("%d", &u.intVal);
+    printf("%d %d\n", u.intVal, &u.intVal);
+    printf("실수:");
+    scanf("%f", &u.floatVal);
+    printf("%d %d\n", u.intVal, &u.intVal);
+    printf("%f %d\n", u.floatVal, &u.floatVal);
+    printf("문자:");
+    scanf("%ms", &u.charVal);
+    printf("%d %d\n", u.intVal, &u.intVal);
+    printf("%f %d\n", u.floatVal, &u.floatVal);
+    printf("%s %d\n", u.charVal, &u.charVal);
+}
