@@ -42,7 +42,7 @@ enum day diffday(int y, enum month m, int d)
 }
 void main()
 {
-    int year = 0, month = 0, dday = 0;
+    int year = 0, month = 0, dday = 0, ddayyear = 0, ddaymonth = 0, ddayday = 0;
     time_t lt;
     struct tm *t;
     lt = time(NULL);
@@ -69,14 +69,17 @@ void main()
     while(TRUE) {
         printf("D-day 날짜를 입력하세요> ");
         scanf("%d", &dday);
-        if (dday / 10000 >= todayyear && dday / 10000 <= 2099 && (dday / 100) % 100 >= 1 && (dday / 100) % 100 <= 12 && dday % 100 >= 1 && dday % 100 <= monthday(dday / 10000, (dday / 100) % 100)) {
-            if (dday / 10000 == todayyear && (dday / 100) % 100 >= todaymonth) {
-                if ((dday / 100) % 100 == todaymonth && dday % 100 >= todayday) {
+        ddayyear = dday / 10000;
+        ddaymonth = (dday / 100) % 100;
+        ddayday = dday % 100;
+        if (ddayyear >= todayyear && ddayyear <= 2099 && ddaymonth >= 1 && ddaymonth <= 12 && ddayday >= 1 && ddayday <= monthday(ddayyear, ddaymonth)) {
+            if (ddayyear == todayyear && ddaymonth >= todaymonth) {
+                if (ddaymonth == todaymonth && ddayday >= todayday) {
                     break;
-                } else if ((dday / 100) % 100 > todaymonth) {
+                } else if (ddaymonth > todaymonth) {
                     break;
                 }
-            } else if (dday / 10000 > todayyear) {
+            } else if (ddayyear > todayyear) {
                 break;
             }
         }
@@ -98,6 +101,6 @@ void main()
             printf("%2d ", i + 1);
         }
     }
-    int diff = diffday(dday / 10000, (dday / 100) % 100, dday % 100) - diffday(todayyear, todaymonth, todayday);
+    int diff = diffday(ddayyear, ddaymonth, ddayday) - diffday(todayyear, todaymonth, todayday);
     printf("\n\nD-%d", diff);
 }
