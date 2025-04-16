@@ -3,8 +3,8 @@
 #define TRUE 1
 #define FALSE 0
 
-enum month {jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec};
-enum day {sun, mon, tue, wed, thu, fri, sat};
+enum month {jan = 1, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec};
+enum day {sun = 0, mon, tue, wed, thu, fri, sat};
 int leapyear(int y)
 {
     if (y % 4 == 0) {
@@ -15,27 +15,27 @@ int leapyear(int y)
 }
 int monthday(int y, int m)
 {
-    if (m == 2) {
+    if (m == feb) {
         return 28 + leapyear(y);
-    } else if (m == 4 || m == 6 || m == 9 || m == 11) {
+    } else if (m == apr || m == jun || m == aug || m == nov) {
         return 30;
     } else {
         return 31;
     }
 }
-enum day startday(int y, enum month m)
+int startday(int y, int m)
 {
     int totalday = (y - 1) * 365 + (y - 1) / 4 - (y - 1) / 100 + (y - 1) / 400;
-    for (int i = jan; i < m; i++) {
-        totalday = totalday + monthday(y, i + 1);
+    for (int i = jan; i <= m; i++) {
+        totalday = totalday + monthday(y, i);
     }
     return (totalday % 7);
 }
-enum day diffday(int y, enum month m, int d)
+int diffday(int y, int m, int d)
 {
     int totalday = (y - 1) * 365 + (y - 1) / 4 - (y - 1) / 100 + (y - 1) / 400;
-    for (int i = jan; i < m; i++) {
-        totalday = totalday + monthday(y, i + 2);
+    for (int i = jan; i <= m; i++) {
+        totalday = totalday + monthday(y, i + 1);
     }
     totalday = totalday + d;
     return totalday;
@@ -84,7 +84,7 @@ void main()
             }
         }
     }
-    enum day start = startday(year, month - 1);
+    int start = startday(year, month - 1);
     printf("\n%04d%02d\n", year, month);
     printf(" s  m  t  w  t  f  s\n");
     for (int i = 0; i < monthday(year, month); i++) {
@@ -93,7 +93,7 @@ void main()
         } else if ((i + start + 1) % 7 == 0 && i == 0) {
             printf("%2d ", i + 1);
         } else if (i == 0) {
-            for (int j = 0; j <= start; j++) {
+            for (int j = sun; j <= start; j++) {
                 printf("   ");
             }
             printf("%2d ", i + 1);
