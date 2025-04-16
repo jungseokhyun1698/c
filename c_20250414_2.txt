@@ -1,13 +1,14 @@
 #include <stdio.h>
 
+union uni {
+    int intVal;
+    float floatVal;
+    char charVal[100];
+};
+
 void main()
 {
-    union u {
-        int intVal;
-        float floatVal;
-        char *charVal;
-    };
-    union u u;
+    union uni u;
     printf("정수:");
     scanf("%d", &u.intVal);
     printf("%d %d\n", u.intVal, &u.intVal);
@@ -16,7 +17,7 @@ void main()
     printf("%d %d\n", u.intVal, &u.intVal);
     printf("%f %d\n", u.floatVal, &u.floatVal);
     printf("문자:");
-    scanf("%ms", &u.charVal);
+    scanf("%s", &u.charVal);
     printf("%d %d\n", u.intVal, &u.intVal);
     printf("%f %d\n", u.floatVal, &u.floatVal);
     printf("%s %d\n", u.charVal, &u.charVal);
