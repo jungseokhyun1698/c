@@ -5,7 +5,6 @@
 
 enum month {jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec};
 enum day {sun, mon, tue, wed, thu, fri, sat};
-
 int leapyear(int y)
 {
     if (y % 4 == 0) {
@@ -43,16 +42,12 @@ enum day diffday(int y, enum month m, int d)
 }
 void main()
 {
-    int year = 0;
-    int month = 0;
-    int dday = 0;
+    int year = 0, month = 0, dday = 0;
     time_t lt;
     struct tm *t;
     lt = time(NULL);
     t = localtime(&lt);
-    int todayyear = t->tm_year + 1900;
-    int todaymonth = t->tm_mon + 1;
-    int todayday = t->tm_mday;
+    int todayyear = t->tm_year + 1900, todaymonth = t->tm_mon + 1, todayday = t->tm_mday;
     while(TRUE) {
         printf("year을 입력하세요> ");
         scanf("%d", &year);
@@ -74,26 +69,20 @@ void main()
     while(TRUE) {
         printf("D-day 날짜를 입력하세요> ");
         scanf("%d", &dday);
-        if (dday / 10000 >= 2000 && dday / 10000 <= 2099 && (dday / 100) % 100 >= 1 && (dday / 100) % 100 <= 12) {
-            if (dday % 100 >= 1 && dday % 100 <= monthday(dday / 10000, (dday / 100) % 100)) {
-                if (dday / 10000 >= todayyear) {
-                    if (dday / 10000 == todayyear && (dday / 100) % 100 >= todaymonth) {
-                        if ((dday / 100) % 100 == todaymonth && dday % 100 >= todayday) {
-                            break;
-                        } else if ((dday / 100) % 100 > todaymonth) {
-                            break;
-                        }
-                    } else if (dday / 10000 > todayyear) {
-                        break;
-                    }
+        if (dday / 10000 >= todayyear && dday / 10000 <= 2099 && (dday / 100) % 100 >= 1 && (dday / 100) % 100 <= 12 && dday % 100 >= 1 && dday % 100 <= monthday(dday / 10000, (dday / 100) % 100)) {
+            if (dday / 10000 == todayyear && (dday / 100) % 100 >= todaymonth) {
+                if ((dday / 100) % 100 == todaymonth && dday % 100 >= todayday) {
+                    break;
+                } else if ((dday / 100) % 100 > todaymonth) {
+                    break;
                 }
+            } else if (dday / 10000 > todayyear) {
+                break;
             }
         }
     }
-    int diff = diffday(dday / 10000, (dday / 100) % 100, dday % 100) - diffday(todayyear, todaymonth, todayday);
-    printf("\nD-%d\n\n", diff);
     enum day start = startday(year, month - 1);
-    printf("%04d%02d\n", year, month);
+    printf("\n%04d%02d\n", year, month);
     printf(" s  m  t  w  t  f  s\n");
     for (int i = 0; i < monthday(year, month); i++) {
         if ((i + start + 1) % 7 == 0 && i != 0) {
@@ -109,4 +98,6 @@ void main()
             printf("%2d ", i + 1);
         }
     }
+    int diff = diffday(dday / 10000, (dday / 100) % 100, dday % 100) - diffday(todayyear, todaymonth, todayday);
+    printf("\n\nD-%d", diff);
 }
