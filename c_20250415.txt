@@ -40,14 +40,9 @@ int diffday(int y, int m, int d)
     totalday = totalday + d;
     return totalday;
 }
-void main()
+int year()
 {
-    int year = 0, month = 0, dday = 0, ddayyear = 0, ddaymonth = 0, ddayday = 0;
-    time_t lt;
-    struct tm *t;
-    lt = time(NULL);
-    t = localtime(&lt);
-    int todayyear = t->tm_year + 1900, todaymonth = t->tm_mon + 1, todayday = t->tm_mday;
+    int year = 0;
     while(TRUE) {
         printf("year을 입력하세요> ");
         scanf("%d", &year);
@@ -57,6 +52,11 @@ void main()
             continue;
         }
     }
+    return year;
+}
+int month()
+{
+    int month = 0;
     while(TRUE) {
         printf("month를 입력하세요> ");
         scanf("%d", &month);
@@ -66,6 +66,16 @@ void main()
             continue;
         }
     }
+    return month;
+}
+int dday()
+{
+    int dday = 0, ddayyear = 0, ddaymonth = 0, ddayday = 0;
+    time_t lt;
+    struct tm *t;
+    lt = time(NULL);
+    t = localtime(&lt);
+    int todayyear = t->tm_year + 1900, todaymonth = t->tm_mon + 1, todayday = t->tm_mday;
     while(TRUE) {
         printf("D-day 날짜를 입력하세요> ");
         scanf("%d", &dday);
@@ -84,8 +94,12 @@ void main()
             }
         }
     }
+    int diff = diffday(dday / 10000, (dday / 100) % 100, dday % 100) - diffday(todayyear, todaymonth, todayday);
+    return diff;
+}
+int cal(int year, int month)
+{
     int start = startday(year, month - 1);
-    printf("\n%04d%02d\n", year, month);
     printf(" s  m  t  w  t  f  s\n");
     for (int i = 0; i < monthday(year, month); i++) {
         if ((i + start + 1) % 7 == 0 && i != 0) {
@@ -101,6 +115,12 @@ void main()
             printf("%2d ", i + 1);
         }
     }
-    int diff = diffday(ddayyear, ddaymonth, ddayday) - diffday(todayyear, todaymonth, todayday);
-    printf("\n\nD-%d", diff);
+}
+void main()
+{
+    int y = year(), m = month();
+    printf("\n%04d%02d\n", y, m);
+    cal(y, m);
+    printf("\n\n");
+    printf("\nD-%d", dday());
 }
