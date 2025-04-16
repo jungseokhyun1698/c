@@ -1,0 +1,34 @@
+#include <stdio.h>
+
+int f(int n)
+{
+    if (n == 0) {
+        return 0;
+    } else if (n == 1) {
+        return 1;
+    } else {
+        return f(n - 1) + f(n - 2);
+    }
+}
+int out(int n)
+{
+    int sum = 0, e = 0, o = 0;
+    for (int i = 1; i <= n; i++) {
+        printf("%d ", f(i));
+        sum = sum + f(i);
+        if (f(i) % 2 == 0) {
+            e = e + 1;
+        } else {
+            o = o + 1;
+        }
+    }
+    printf("\n합 : %d", sum);
+    printf("\n홀/짝 : %d/%d", o, e);
+}
+void main()
+{
+    int a = 0;
+    scanf("%d", &a);
+    f(a);
+    out(a);
+}
