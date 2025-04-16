@@ -4,11 +4,16 @@
 
 void main()
 {
-    enum d {SEDAN = 1, SUV = 2, TRUCK = 3, VAN = 4};
-    enum d dd;
-    
-    printf("1. SEDAN, 2. SUV, 3. TRUCK, 4. VAN ");
-    scanf("%d", &dd);
+    enum d {SEDAN = 1, SUV, TRUCK, VAN};
+    int dd = 0;
+    while(TRUE) {
+        printf("%d. SEDAN, %d. SUV, %d. TRUCK, %d. VAN ", SEDAN, SUV, TRUCK, VAN);
+        int a = scanf("%d", &dd);
+        while (getchar() != '\n');
+        if (a == 1 && dd >= SEDAN && dd <= VAN) {
+            break;
+        }
+    }
     switch (dd)
     {
         case SEDAN:
@@ -23,7 +28,5 @@ void main()
         case VAN:
             printf("VAN");
             break;
-        default:
-            printf("선택 불가능\n");
     }
 }
