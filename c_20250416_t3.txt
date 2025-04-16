@@ -1,0 +1,71 @@
+#include <stdio.h>
+
+int input()
+{
+    int a = 0;
+    while(1) {
+        scanf("%d", &a);
+        if (a % 2 == 1 && a != 1) {
+            break;
+        } else if (a == 1) {
+            printf("*");
+            break;
+        } else {
+            continue;
+        }
+    }
+    return a;
+}
+int up(int a)
+{
+    int w = (a - 1) / 2, x = 1;
+    while(1) {
+        for (int i = 0; i < w; i++) {
+            printf(" ");
+        }
+        w--;
+        for (int i = 0; i < x; i++) {
+            printf("*");
+        }
+        printf("\n");
+        x = x + 2;
+        if (x == a) {
+            break;
+        }
+    }
+}
+int down(int a)
+{
+    int y = 1, z = a - 2;
+    while(1) {
+        for (int i = 0; i < y; i++) {
+            printf(" ");
+        }
+        y++;
+        for (int i = 0; i < z; i++) {
+            printf("*");
+        }
+        printf("\n");
+        z = z - 2;
+        if (z < 0) {
+            break;
+        }
+    }
+}
+int center(int a)
+{
+    for (int i = 0; i < a; i++) {
+        printf("*");
+    }
+    printf("\n");
+}
+int main()
+{
+    int a = input();
+    if (a != 1) {
+        up(a);
+        center(a);
+        down(a);
+    }
+    return 0;
+}
